@@ -11,11 +11,7 @@ Automatiza o envio mensal de escalas personalizadas para operadores de loja via 
 - [Pré-requisitos](#pré-requisitos)
 - [Instalação](#instalação)
 - [Uso](#uso)
-- [Estrutura do Projeto](#estrutura-do-projeto)
-- [Configurações](#configurações)
-- [Considerações](#considerações)
-- [Melhorias Futuras](#melhorias-futuras)
-- [Autor](#autor)
+
 
 ---
 
