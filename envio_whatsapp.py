@@ -44,7 +44,7 @@ Você está escalado para a loja {loja} no dia {data} ({dia_semana}).
 
 Por favor, confirme sua presença preenchendo o formulário abaixo:
 
-🔗 https://forms.gle/Uhgp98hTx8cGFd9DA
+🔗 
 
 📧 Se não encontrar o e-mail na caixa de entrada, verifique também sua caixa de spam.
 

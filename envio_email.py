@@ -33,7 +33,7 @@ Você está escalado para a loja {loja} no dia {data} ({dia_semana}).
 
 👉 Para aceitar ou recusar sua convocação, acesse o formulário abaixo, preencha com seu CPF e selecione SIM ou NÃO:
 
-🔗 Formulário: https://forms.gle/Uhgp98hTx8cGFd9DA
+🔗 Formulário: 
 
 Atenciosamente,  
 Equipe de Escalas
