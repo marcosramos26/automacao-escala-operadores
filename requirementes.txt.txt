@@ -1,5 +1,0 @@
-pandas
-pywhatkit
-pyautogui
-pywin32
-openpyxl

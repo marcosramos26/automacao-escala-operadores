@@ -3,7 +3,7 @@ import time
 import win32com.client as win32
 
 # === Carregar e preparar a planilha ===
-df = pd.read_excel('escalas.xlsx', sheet_name='BASE CONVOCACAO')
+df = pd.read_excel('Automatização Escalas.xlsx', sheet_name='STATUS OPERADORES')
 df.columns = df.columns.str.strip()
 
 df['DATA'] = pd.to_datetime(df['DATA'])
@@ -31,9 +31,9 @@ Você está escalado para a loja {loja} no dia {data} ({dia_semana}).
 🕒 Entrada: {entrada}  
 🕔 Saída: {saida}
 
-Você confirma presença?
+👉 Para aceitar ou recusar sua convocação, acesse o formulário abaixo, preencha com seu CPF e selecione SIM ou NÃO:
 
-Por favor, responda este e-mail com *SIM* ou *NÃO*.
+🔗 Formulário: https://forms.gle/Uhgp98hTx8cGFd9DA
 
 Atenciosamente,  
 Equipe de Escalas
@@ -46,8 +46,16 @@ Equipe de Escalas
         mail.Body = corpo_email.strip()
         mail.Send()
         print(f"✅ E-mail enviado para: {nome} ({email})")
-        time.sleep(10)  # delay para evitar bloqueios
+
+        # Delay entre e-mails para evitar bloqueios
+        time.sleep(4)
+
+        # Pausa de segurança a cada 100 e-mails enviados
+        if (i + 1) % 100 == 0:
+            print("⏸️ Pausa de segurança de 30 segundos...")
+            time.sleep(30)
+
     except Exception as e:
         print(f"❌ Erro ao enviar e-mail para {email}: {e}")
 
-print("\n📨 Todos os e-mails foram processados!")
+print("\n📨 Todos os e-mails foram processados com sucesso!")

@@ -4,7 +4,7 @@ import pywhatkit as kit
 import pyautogui
 
 # === Carregar e preparar a planilha ===
-df = pd.read_excel('escalas.xlsx', sheet_name='BASE CONVOCACAO')
+df = pd.read_excel('Automatização Escalas.xlsx', sheet_name='STATUS OPERADORES')
 df.columns = df.columns.str.strip()
 
 df['DATA'] = pd.to_datetime(df['DATA'])
@@ -42,7 +42,9 @@ Você está escalado para a loja {loja} no dia {data} ({dia_semana}).
 🕒 Entrada: {entrada}  
 🕔 Saída: {saida}
 
-Por favor, confirme sua presença respondendo o e-mail que enviamos.
+Por favor, confirme sua presença preenchendo o formulário abaixo:
+
+🔗 https://forms.gle/Uhgp98hTx8cGFd9DA
 
 📧 Se não encontrar o e-mail na caixa de entrada, verifique também sua caixa de spam.
 
@@ -53,9 +55,11 @@ Agradecemos!
             kit.sendwhatmsg_instantly(numero, mensagem.strip(), wait_time=15, tab_close=False)
             time.sleep(7)
             pyautogui.press('enter')
-            time.sleep(0.5)
+            time.sleep(1)
             pyautogui.press('enter')
-            time.sleep(10)
+            time.sleep(7)  # espera para garantir que a mensagem foi enviada
+            pyautogui.hotkey('ctrl', 'w')  # fecha a aba atual no Chrome
+            time.sleep(3)  # pequena pausa antes do próximo envio
             print(f"✅ Mensagem enviada para: {nome}")
         except Exception as e:
             print(f"❌ Erro ao enviar para {numero}: {e}")
