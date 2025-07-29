@@ -1,6 +1,6 @@
 # Automação de Convocação de Escalas Operacionais
 
-Automatiza o envio mensal de escalas personalizadas para operadores de loja via e-mail e WhatsApp, facilitando a comunicação e agilizando o processo de confirmação de presença.
+Automatiza o envio mensal de escalas personalizadas para operadores de loja via e-mail e WhatsApp, com confirmação de presença centralizada em Google Forms.
 
 ---
 
@@ -12,76 +12,109 @@ Automatiza o envio mensal de escalas personalizadas para operadores de loja via 
 - [Instalação](#instalação)
 - [Uso](#uso)
 
-
 ---
 
 ## Funcionalidades
 
-- Envio automático de e-mails via Outlook com escala personalizada.
-- Envio de mensagens via WhatsApp Web reforçando a convocação.
-- Contagem regressiva para preparar a tela do WhatsApp.
-- Validação básica de números de telefone.
-- Tratamento de exceções para evitar paradas inesperadas.
+- Envio automático de e-mails via Outlook a partir de planilha Excel (`Automatização Escalas.xlsx`, aba `STATUS OPERADORES`).
+- Delay de 4 s entre envios e pausa de 30 s a cada 100 e-mails para evitar bloqueios.
+- Envio de mensagens via WhatsApp Web como canal de emergência, fechando cada aba após envio.
+- Contagem regressiva de 10 s antes do disparo no WhatsApp.
+- Link para Google Forms em todos os canais para confirmação (CPF + Sim/Não).
+- Uso de PROCV / ÍNDICE+CORRESP no Google Planilhas para atualizar automaticamente o status de respostas.
 
 ---
 
 ## Tecnologias
 
-- Python 3.x
-- Pandas
-- pywhatkit
-- pyautogui
-- pywin32 (win32com)
-- openpyxl
+- Python 3.x  
+- Pandas  
+- win32com (Outlook)  
+- pywhatkit, pyautogui (WhatsApp Web)  
+- openpyxl  
 
 ---
 
 ## Pré-requisitos
 
-- Windows 10 ou 11 (Outlook instalado e configurado)
-- Conta Outlook configurada no Windows
-- Google Chrome instalado e WhatsApp Web autenticado
+- Windows 10 ou 11 com Outlook instalado e configurado  
+- Google Chrome com WhatsApp Web autenticado  
+- Planilha local `Automatização Escalas.xlsx`, aba `STATUS OPERADORES` com colunas:
+  1. LOJA  
+  2. DATA  
+  3. HORA ENTRADA  
+  4. HORA SAÍDA  
+  5. DIA DA SEMANA  
+  6. CPF  
+  7. NOME  
+  8. EMAIL  
+  9. TELEFONE  
+  10. STATUS  
 
 ---
 
 ## Instalação
 
-1. Clone o repositório:
-    ```bash
-    git clone https://github.com/seuusuario/automacao-escala.git
-    cd automacao-escala
-    ```
+1. Clone o repositório:  
+   ```bash
+   git clone https://github.com/marcosramos26/automacao-escala-operadores.git
+   cd automacao-escala-operadores
+(Opcional) Crie e ative um ambiente virtual:
 
-2. Crie um ambiente virtual (opcional mas recomendado):
-    ```bash
-    python -m venv venv
-    source venv/bin/activate  # Linux/Mac
-    venv\Scripts\activate     # Windows
-    ```
+bash
+Copiar
+Editar
+python -m venv venv
+venv\Scripts\activate   # Windows
+source venv/bin/activate # Linux/Mac
+Instale as dependências:
 
-3. Instale as dependências:
-    ```bash
-    pip install -r requirements.txt
-    ```
+bash
+Copiar
+Editar
+pip install -r requirements.txt
+Uso
+Atualize sua planilha no Google Planilhas; baixe-a como Automatização Escalas.xlsx e coloque na raiz do projeto.
 
----
+Envio de e-mail
+Execute:
 
-## Uso
+bash
+Copiar
+Editar
+python envio_email.py
+Aguarde o script rodar (~4 s entre cada e-mail, pausa a cada 100).
 
-1. Prepare o arquivo `escalas.xlsx` na pasta raiz com a aba `BASE CONVOCACAO`, contendo as colunas:
-   - NOME, LOJA, DATA, DIA DA SEMANA, HORA ENTRADA, HORA SAÍDA, EMAIL, TELEFONE
+Envio de WhatsApp (em caso de não-resposta)
+Execute:
 
-2. Execute o script principal:
-    ```bash
-    python main.py
-    ```
+bash
+Copiar
+Editar
+python envio_whatsapp.py
+Deixe o WhatsApp Web aberto e em foco.
 
-3. Para o envio do WhatsApp:
-    - Deixe o WhatsApp Web aberto no Chrome.
-    - Deixe a aba do WhatsApp Web ativa e em foco (tela principal).
-    - Aguarde a contagem regressiva antes de iniciar o envio das mensagens.
+Aguarde a contagem regressiva de 10 s e o envio acontecer, com cada aba sendo fechada.
 
----
+Confirmação via Google Forms
 
-## Estrutura do Projeto
+Todas as comunicações incluem um link para o Forms.
 
+As respostas (Sim/Não) aparecem automaticamente na planilha de respostas do Forms.
+
+Use PROCV ou ÍNDICE+CORRESP no Google Planilhas para preencher a coluna STATUS.
+
+Estrutura do Projeto
+bash
+Copiar
+Editar
+automacao-escala-operadores/
+│
+├── Automatização Escalas.xlsx  # Planilha baixada do Google Sheets
+├── envio_email.py             # Script de envio automático de e-mails
+├── envio_whatsapp.py          # Script de envio de mensagens no WhatsApp Web
+├── requirements.txt           # Dependências Python
+└── README.md                  # Documentação (este arquivo)
+Autor
+Marcos Ramos
+GitHub | LinkedIn
